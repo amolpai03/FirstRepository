@@ -231,5 +231,68 @@ col_widths3 = [5, 34, 22, 18, 18, 14, 22, 14, 28, 38]
 for i, w in enumerate(col_widths3, 1):
     ws3.column_dimensions[get_column_letter(i)].width = w
 
+# ── SHEET 4: Demand Planner Roles ─────────────────────────────────────────
+ws4 = wb.create_sheet("Demand Planner Roles")
+
+ws4.row_dimensions[1].height = 30
+ws4.merge_cells("A1:J1")
+ws4["A1"] = "Demand Planner / Senior Demand Planner Roles — US Job Listings"
+ws4["A1"].font = Font(name="Arial", bold=True, color=DARK_BLUE, size=14)
+ws4["A1"].alignment = center()
+ws4["A1"].fill = PatternFill("solid", start_color="E2EFDA")
+
+ws4.row_dimensions[2].height = 8
+
+ws4.row_dimensions[3].height = 22
+headers4 = ["#", "Job Title", "Company", "Location", "Type", "Salary", "Match", "Link", "Recruiter / HM", "Notes"]
+for c, h in enumerate(headers4, 1):
+    cell = ws4.cell(row=3, column=c, value=h)
+    cell.font = header_font()
+    cell.fill = header_fill()
+    cell.alignment = center()
+    cell.border = border
+
+data4 = [
+    (1, "Sr. Supply Demand Planner ⭐",           "Intuitive",           "Sunnyvale, CA",  "On-site · Full-time", "$118.7K–$170.7K", "HIGH",
+     "https://www.linkedin.com/jobs/view/4345274465/", "Not listed",           "2 o9 alumni work here · Responses managed off LinkedIn"),
+    (2, "Sr. Supply & Demand Planner ⭐",          "Kohler Co.",          "Kohler, WI",     "On-site · Full-time", "Not listed",       "HIGH",
+     "https://www.linkedin.com/jobs/view/4366386259/", "Taylor Magri, CRD\nRecruiter @ Kohler", "o9 alumni in network · Message recruiter directly!"),
+    (3, "Senior Supply Chain Planner ⭐",          "Micron Technology",   "Boise, ID",      "On-site · Full-time", "Not listed",       "HIGH",
+     "https://www.linkedin.com/jobs/view/4386872480/", "Not listed",           "50 school alumni work here"),
+    (4, "Senior Analyst, Supply Chain Planning ⭐", "Analog Devices",     "Wilmington, MA", "Hybrid · Full-time",  "Not listed",       "HIGH",
+     "https://www.linkedin.com/jobs/view/4371933606/", "Not listed",           "140 school alumni work here"),
+    (5, "Supply Chain Analysts – Sr #GA001 ⭐",    "Cummins Inc.",        "Atlanta, GA",    "On-site · Full-time", "Not listed",       "HIGH",
+     "https://www.linkedin.com/jobs/view/4393461958/", "Not listed",           "73 school alumni work here"),
+    (6, "Sr Demand Planner (Ecomm & Wholesale) 🟢","Velvet Caviar",       "New York, US",   "Remote",              "$90K–$120K",       "—",
+     "https://www.linkedin.com/jobs/view/4391579652/", "Not listed",           "Easy Apply · Actively reviewing applicants"),
+    (7, "Senior S&OP Planner",                     "Amazon Web Services", "Seattle, WA",    "On-site · Full-time", "Not listed",       "—",
+     "https://www.linkedin.com/jobs/view/4381119799/", "Not listed",           "11 o9 alumni work here"),
+]
+
+GREEN_LIGHT = "E2EFDA"
+for i, row_data in enumerate(data4):
+    r = i + 4
+    ws4.row_dimensions[r].height = 36
+    fill = PatternFill("solid", start_color=GREEN_LIGHT) if i % 2 == 0 else white_fill()
+    for c, val in enumerate(row_data, 1):
+        cell = ws4.cell(row=r, column=c)
+        cell.fill = fill
+        cell.border = border
+        cell.font = normal_font()
+        cell.alignment = center() if c == 1 else left()
+        if c == 8:
+            add_hyperlink(cell, val, "View Job →")
+            cell.fill = fill
+        else:
+            cell.value = val
+            # Bold HIGH match column
+            if c == 7 and val == "HIGH":
+                cell.font = Font(name="Arial", size=10, bold=True, color="375623")
+
+ws4.freeze_panes = "A4"
+col_widths4 = [5, 34, 20, 16, 18, 16, 8, 14, 30, 40]
+for i, w in enumerate(col_widths4, 1):
+    ws4.column_dimensions[get_column_letter(i)].width = w
+
 wb.save("C:/Users/amolp/Prometheus/job_listings_v2.xlsx")
-print("Done: job_listings_v2.xlsx created")
+print("Done: job_listings_v2.xlsx updated with Demand Planner sheet")
