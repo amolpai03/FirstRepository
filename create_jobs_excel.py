@@ -171,5 +171,65 @@ col_widths2 = [5, 32, 20, 14, 18, 16, 14, 32, 38]
 for i, w in enumerate(col_widths2, 1):
     ws2.column_dimensions[get_column_letter(i)].width = w
 
-wb.save("C:/Users/amolp/Prometheus/job_listings.xlsx")
-print("Done: job_listings.xlsx created")
+# ── SHEET 3: Last 24 Hours ────────────────────────────────────────────────
+ws3 = wb.create_sheet("🔥 Last 24 Hours")
+
+ws3.row_dimensions[1].height = 30
+ws3.merge_cells("A1:J1")
+ws3["A1"] = "🔥 Hot Jobs — Posted in Last 24 Hours (US) — " + "April 10, 2026"
+ws3["A1"].font = Font(name="Arial", bold=True, color=WHITE, size=14)
+ws3["A1"].alignment = center()
+ws3["A1"].fill = PatternFill("solid", start_color="C00000")
+
+ws3.row_dimensions[2].height = 8
+
+ws3.row_dimensions[3].height = 22
+headers3 = ["#", "Job Title", "Company", "Location", "Type", "Salary/Rate", "Posted", "Link", "Recruiter / HM", "Notes"]
+for c, h in enumerate(headers3, 1):
+    cell = ws3.cell(row=3, column=c, value=h)
+    cell.font = header_font()
+    cell.fill = header_fill()
+    cell.alignment = center()
+    cell.border = border
+
+data3 = [
+    (1, "Senior SAP IBP Consultant 🚀",    "SELECCIÓN Consulting", "East Brunswick, NJ", "Hybrid · Full-time",  "—",              "10 mins ago · 0 applicants!",
+     "https://www.linkedin.com/jobs/view/4400587273/", "Krishna S. (visible on search)", "Easy Apply · APPLY NOW — first mover advantage!"),
+    (2, "Solution Architect - WMS ⭐",       "Blue Yonder",          "Coppell, TX",         "Remote · Full-time",  "—",              "4 hrs ago · 99 clicked",
+     "https://www.linkedin.com/jobs/view/4321921503/", "Network: Kevin + others",        "HIGH MATCH · Responses managed off LinkedIn"),
+    (3, "Kinaxis Sr Solution Consultant 🟢", "Pacer Group",          "USA",                 "Remote · Contract",   "$82–$92/hr",     "4 hrs ago · 45 applicants",
+     "https://www.linkedin.com/jobs/view/4393864119/", "Not listed",                     "Easy Apply · ~$170K–$190K annualized"),
+    (4, "Platform Architect - Semantics",    "Kinaxis (Direct)",     "USA",                 "Remote · Full-time",  "—",              "46 mins ago",
+     "https://www.linkedin.com/jobs/view/4398156298/", "Not listed",                     "Direct from Kinaxis"),
+    (5, "Blue Yonder Project Manager 🟢",    "Maven Workforce Inc.", "California",          "Remote",              "—",              "1 hr ago",
+     "https://www.linkedin.com/jobs/view/4400574301/", "Not listed",                     "Easy Apply"),
+    (6, "SAP IBP Consultant",                "Jobs via Dice",        "USA",                 "Remote",              "—",              "4 hrs ago",
+     "https://www.linkedin.com/jobs/view/4398118825/", "Not listed",                     ""),
+]
+
+for i, row_data in enumerate(data3):
+    r = i + 4
+    ws3.row_dimensions[r].height = 36
+    fill = alt_fill() if i % 2 == 0 else white_fill()
+    for c, val in enumerate(row_data, 1):
+        cell = ws3.cell(row=r, column=c)
+        cell.fill = fill
+        cell.border = border
+        cell.font = normal_font()
+        if c == 1:
+            cell.alignment = center()
+        else:
+            cell.alignment = left()
+        if c == 8:
+            add_hyperlink(cell, val, "View Job →")
+            cell.fill = fill
+        else:
+            cell.value = val
+
+ws3.freeze_panes = "A4"
+col_widths3 = [5, 34, 22, 18, 18, 14, 22, 14, 28, 38]
+for i, w in enumerate(col_widths3, 1):
+    ws3.column_dimensions[get_column_letter(i)].width = w
+
+wb.save("C:/Users/amolp/Prometheus/job_listings_v2.xlsx")
+print("Done: job_listings_v2.xlsx created")
