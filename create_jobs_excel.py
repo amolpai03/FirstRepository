@@ -267,6 +267,10 @@ data4 = [
      "https://www.linkedin.com/jobs/view/4391579652/", "Not listed",           "Easy Apply · Actively reviewing applicants"),
     (7, "Senior S&OP Planner",                     "Amazon Web Services", "Seattle, WA",    "On-site · Full-time", "Not listed",       "—",
      "https://www.linkedin.com/jobs/view/4381119799/", "Not listed",           "11 o9 alumni work here"),
+    (8, "Senior Demand Planner ⭐",                 "Intel",               "Santa Clara, CA","Hybrid · Full-time",  "Not listed",       "HIGH",
+     "https://www.linkedin.com/jobs/view/4394482391/", "Rutvi (in network)", "381 school alumni · Mentions Blue Yonder! · Responses managed off LinkedIn · 4 days ago"),
+    (9, "Senior Demand Planner ⭐",                 "Intel",               "Folsom, CA",     "Hybrid · Full-time",  "Not listed",       "HIGH",
+     "https://www.linkedin.com/jobs/view/4394478440/", "Rutvi (in network)", "381 school alumni · Mentions Blue Yonder! · Responses managed off LinkedIn · 4 days ago"),
 ]
 
 GREEN_LIGHT = "E2EFDA"
