@@ -298,5 +298,102 @@ col_widths4 = [5, 34, 20, 16, 18, 16, 8, 14, 30, 40]
 for i, w in enumerate(col_widths4, 1):
     ws4.column_dimensions[get_column_letter(i)].width = w
 
+# ── SHEET 5: Deloitte Roles ───────────────────────────────────────────────
+ws5 = wb.create_sheet("🏢 Deloitte Roles")
+
+DELOITTE_GREEN = "D4EDDA"
+DELOITTE_HEADER = "1A3C34"  # Deloitte brand dark green
+
+ws5.row_dimensions[1].height = 30
+ws5.merge_cells("A1:J1")
+ws5["A1"] = "🏢 Deloitte — Supply Chain & Planning Roles — US Job Listings"
+ws5["A1"].font = Font(name="Arial", bold=True, color=WHITE, size=14)
+ws5["A1"].alignment = center()
+ws5["A1"].fill = PatternFill("solid", start_color="86BC25")  # Deloitte lime green
+
+ws5.row_dimensions[2].height = 8
+
+ws5.row_dimensions[3].height = 22
+headers5 = ["#", "Job Title", "Company", "Location", "Type", "Salary", "Tier", "Link", "Apply Deadline", "Notes"]
+for c, h in enumerate(headers5, 1):
+    cell = ws5.cell(row=3, column=c, value=h)
+    cell.font = header_font()
+    cell.fill = PatternFill("solid", start_color="004B23")  # Deloitte dark green
+    cell.alignment = center()
+    cell.border = border
+
+data5 = [
+    (1, "Supply Chain Planning Manager ⭐⭐\n(o9, OMP, or Blue Yonder/JDA)",
+     "Deloitte", "Charlotte, NC + Multiple", "Hybrid · Full-time",
+     "Not listed", "PERFECT",
+     "https://apply.deloitte.com/careers/JobDetail/Supply-Chain-Planning-Manager-experience-with-o9-OMP-or-Blue-Yonder-JDA/119515",
+     "Open", "8+ yrs SC · o9/OMP/BY in title! · S&OP/IBP · 50% travel"),
+    (2, "Supply Chain Planning Senior Consultant ⭐⭐\n(o9, OMP, or Blue Yonder/JDA)",
+     "Deloitte", "Huntsville, AL (Hybrid)", "Hybrid · Full-time",
+     "$95K–$135K est.", "PERFECT",
+     "https://www.linkedin.com/jobs/view/4373925993/",
+     "Open", "5+ yrs SC · o9/OMP/BY in title! · Demand/Supply/Inventory Planning"),
+    (3, "Supply Chain Planning Consultant ⭐\n(o9, OMP, or Blue Yonder/JDA)",
+     "Deloitte", "Huntsville, AL (Hybrid)", "Hybrid · Full-time",
+     "$67K–$111K est.", "STRONG",
+     "https://www.linkedin.com/jobs/view/4373929959/",
+     "Open · 1 wk ago", "3+ yrs SC · o9/OMP/BY in title! · Entry to Senior Consultant level"),
+    (4, "SCNO Strategic Sourcing & Procurement Senior Manager ⭐",
+     "Deloitte", "Charlotte, NC (Hybrid)", "Hybrid · Full-time",
+     "$159K–$293K 💰", "STRONG",
+     "https://www.linkedin.com/jobs/view/4377149810/",
+     "5/30/2026", "28 o9 alumni · 2 days ago · Coupa/Ariba/iValua · SC transformation"),
+    (5, "SCNO Strategic Sourcing & Procurement Senior Manager ⭐",
+     "Deloitte", "Atlanta, GA (Hybrid)", "Hybrid · Full-time",
+     "$159K–$293K 💰", "STRONG",
+     "https://www.linkedin.com/jobs/view/4377163250/",
+     "5/30/2026", "28 o9 alumni · 2 days ago · Same role different location"),
+    (6, "Supply Chain Sourcing & Procurement Consulting Manager",
+     "Deloitte", "New York, NY (Hybrid)", "Hybrid · Full-time",
+     "$130.8K–$241K 💰", "GOOD",
+     "https://www.linkedin.com/jobs/view/4367928244/",
+     "Open · 4 days ago", "28 o9 alumni · Coupa/Ariba/iValua · Category Mgmt · 50% travel"),
+    (7, "Supply Chain Sourcing & Procurement Consulting Manager",
+     "Deloitte", "Philadelphia, PA (Hybrid)", "Hybrid · Full-time",
+     "$130.8K–$241K 💰", "GOOD",
+     "https://www.linkedin.com/jobs/view/4367915410/",
+     "Open · 4 days ago", "28 o9 alumni · Same role, Philly location"),
+    (8, "Oracle Cloud Supply Chain Manager",
+     "Deloitte", "Jersey City, NJ (Hybrid)", "Hybrid · Full-time",
+     "Not listed", "GOOD",
+     "https://www.linkedin.com/jobs/view/4383839935/",
+     "Open · 1 wk ago", "28 o9 alumni · Oracle SC Cloud · Be an early applicant"),
+]
+
+DELOITTE_ALT = "EAF5E0"
+for i, row_data in enumerate(data5):
+    r = i + 4
+    ws5.row_dimensions[r].height = 42
+    fill = PatternFill("solid", start_color=DELOITTE_ALT) if i % 2 == 0 else white_fill()
+    for c, val in enumerate(row_data, 1):
+        cell = ws5.cell(row=r, column=c)
+        cell.fill = fill
+        cell.border = border
+        cell.font = normal_font()
+        cell.alignment = center() if c == 1 else left()
+        if c == 8:
+            add_hyperlink(cell, val, "View Job →")
+            cell.fill = fill
+        else:
+            cell.value = val
+            if c == 7:
+                if val == "PERFECT":
+                    cell.font = Font(name="Arial", size=10, bold=True, color="004B23")
+                    cell.fill = PatternFill("solid", start_color="86BC25")
+                elif val == "STRONG":
+                    cell.font = Font(name="Arial", size=10, bold=True, color="1F4E79")
+                elif val == "GOOD":
+                    cell.font = Font(name="Arial", size=10, bold=True, color="7F6000")
+
+ws5.freeze_panes = "A4"
+col_widths5 = [5, 36, 12, 20, 18, 18, 9, 14, 16, 44]
+for i, w in enumerate(col_widths5, 1):
+    ws5.column_dimensions[get_column_letter(i)].width = w
+
 wb.save("C:/Users/amolp/Prometheus/job_listings_v2.xlsx")
-print("Done: job_listings_v2.xlsx updated with Demand Planner sheet")
+print("Done: job_listings_v2.xlsx updated with Deloitte Roles sheet")
