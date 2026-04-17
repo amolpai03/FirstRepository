@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:docs.bmad-method.org)",
+      "Bash(npx bmad-method@next install)",
+      "Bash(gh repo *)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(npx bmad-method@next install --directory . --modules bmm --tools claude-code --yes)"
+    ]
+  }
+}
