@@ -4,6 +4,8 @@ Run: python3 linkedin_jobs.py
 """
 
 import os
+from dotenv import load_dotenv
+load_dotenv()
 from linkedin_api import Linkedin
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
